@@ -17,6 +17,8 @@
 		D156FEE62D02256300860999 /* FlightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEE52D02256300860999 /* FlightsViewController.swift */; };
 		D156FEE82D02257000860999 /* FlightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEE72D02257000860999 /* FlightsViewModel.swift */; };
 		D156FEEA2D02258200860999 /* FlightsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D156FEE92D02258200860999 /* FlightsStoryboard.storyboard */; };
+		D156FEEC2D0235C500860999 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEEB2D0235C500860999 /* Constants.swift */; };
+		D156FEEF2D023E1B00860999 /* OpenSkyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEEE2D023E1B00860999 /* OpenSkyResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		D156FEE52D02256300860999 /* FlightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightsViewController.swift; sourceTree = "<group>"; };
 		D156FEE72D02257000860999 /* FlightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightsViewModel.swift; sourceTree = "<group>"; };
 		D156FEE92D02258200860999 /* FlightsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FlightsStoryboard.storyboard; sourceTree = "<group>"; };
+		D156FEEB2D0235C500860999 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D156FEEE2D023E1B00860999 /* OpenSkyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSkyResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,7 @@
 		D156FEE02D02231600860999 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D156FEEB2D0235C500860999 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 		D156FEE32D02233500860999 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D156FEEE2D023E1B00860999 /* OpenSkyResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -317,8 +323,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D156FEEC2D0235C500860999 /* Constants.swift in Sources */,
 				D156FEE62D02256300860999 /* FlightsViewController.swift in Sources */,
 				D156FEAF2D021C3B00860999 /* AppDelegate.swift in Sources */,
+				D156FEEF2D023E1B00860999 /* OpenSkyResponse.swift in Sources */,
 				D156FEE82D02257000860999 /* FlightsViewModel.swift in Sources */,
 				D156FEB12D021C3B00860999 /* SceneDelegate.swift in Sources */,
 			);
