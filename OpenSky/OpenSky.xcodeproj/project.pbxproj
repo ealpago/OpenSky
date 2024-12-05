@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		D156FEAF2D021C3B00860999 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEAE2D021C3B00860999 /* AppDelegate.swift */; };
 		D156FEB12D021C3B00860999 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEB02D021C3B00860999 /* SceneDelegate.swift */; };
-		D156FEB32D021C3B00860999 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEB22D021C3B00860999 /* ViewController.swift */; };
-		D156FEB62D021C3B00860999 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D156FEB42D021C3B00860999 /* Main.storyboard */; };
 		D156FEB82D021C3C00860999 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D156FEB72D021C3C00860999 /* Assets.xcassets */; };
 		D156FEBB2D021C3C00860999 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D156FEB92D021C3C00860999 /* LaunchScreen.storyboard */; };
 		D156FEC62D021C3C00860999 /* OpenSkyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEC52D021C3C00860999 /* OpenSkyTests.swift */; };
 		D156FED02D021C3C00860999 /* OpenSkyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FECF2D021C3C00860999 /* OpenSkyUITests.swift */; };
 		D156FED22D021C3C00860999 /* OpenSkyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FED12D021C3C00860999 /* OpenSkyUITestsLaunchTests.swift */; };
+		D156FEE62D02256300860999 /* FlightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEE52D02256300860999 /* FlightsViewController.swift */; };
+		D156FEE82D02257000860999 /* FlightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEE72D02257000860999 /* FlightsViewModel.swift */; };
+		D156FEEA2D02258200860999 /* FlightsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D156FEE92D02258200860999 /* FlightsStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +40,6 @@
 		D156FEAB2D021C3B00860999 /* OpenSky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D156FEAE2D021C3B00860999 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D156FEB02D021C3B00860999 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D156FEB22D021C3B00860999 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D156FEB52D021C3B00860999 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D156FEB72D021C3C00860999 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D156FEBA2D021C3C00860999 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D156FEBC2D021C3C00860999 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +48,9 @@
 		D156FECB2D021C3C00860999 /* OpenSkyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenSkyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D156FECF2D021C3C00860999 /* OpenSkyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSkyUITests.swift; sourceTree = "<group>"; };
 		D156FED12D021C3C00860999 /* OpenSkyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSkyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D156FEE52D02256300860999 /* FlightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightsViewController.swift; sourceTree = "<group>"; };
+		D156FEE72D02257000860999 /* FlightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightsViewModel.swift; sourceTree = "<group>"; };
+		D156FEE92D02258200860999 /* FlightsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FlightsStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,8 +107,8 @@
 				D156FEE02D02231600860999 /* Helpers */,
 				D156FEDF2D02230300860999 /* Modules */,
 				D156FEDE2D0222F800860999 /* Resources */,
-				D156FEB22D021C3B00860999 /* ViewController.swift */,
-				D156FEB42D021C3B00860999 /* Main.storyboard */,
+				D156FEB72D021C3C00860999 /* Assets.xcassets */,
+				D156FEBC2D021C3C00860999 /* Info.plist */,
 				D156FEB92D021C3C00860999 /* LaunchScreen.storyboard */,
 			);
 			path = OpenSky;
@@ -132,8 +134,6 @@
 		D156FEDE2D0222F800860999 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D156FEB72D021C3C00860999 /* Assets.xcassets */,
-				D156FEBC2D021C3C00860999 /* Info.plist */,
 				D156FEAE2D021C3B00860999 /* AppDelegate.swift */,
 				D156FEB02D021C3B00860999 /* SceneDelegate.swift */,
 			);
@@ -143,6 +143,7 @@
 		D156FEDF2D02230300860999 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D156FEE42D02252E00860999 /* Flights */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -173,6 +174,16 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D156FEE42D02252E00860999 /* Flights */ = {
+			isa = PBXGroup;
+			children = (
+				D156FEE52D02256300860999 /* FlightsViewController.swift */,
+				D156FEE72D02257000860999 /* FlightsViewModel.swift */,
+				D156FEE92D02258200860999 /* FlightsStoryboard.storyboard */,
+			);
+			path = Flights;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,8 +291,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D156FEBB2D021C3C00860999 /* LaunchScreen.storyboard in Resources */,
+				D156FEEA2D02258200860999 /* FlightsStoryboard.storyboard in Resources */,
 				D156FEB82D021C3C00860999 /* Assets.xcassets in Resources */,
-				D156FEB62D021C3B00860999 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,8 +317,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D156FEB32D021C3B00860999 /* ViewController.swift in Sources */,
+				D156FEE62D02256300860999 /* FlightsViewController.swift in Sources */,
 				D156FEAF2D021C3B00860999 /* AppDelegate.swift in Sources */,
+				D156FEE82D02257000860999 /* FlightsViewModel.swift in Sources */,
 				D156FEB12D021C3B00860999 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,14 +357,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D156FEB42D021C3B00860999 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D156FEB52D021C3B00860999 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D156FEB92D021C3C00860999 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -495,7 +499,7 @@
 				INFOPLIST_FILE = OpenSky/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = FlightsStoryboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -523,7 +527,7 @@
 				INFOPLIST_FILE = OpenSky/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = FlightsStoryboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
