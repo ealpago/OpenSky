@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D156FEAF2D021C3B00860999 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEAE2D021C3B00860999 /* AppDelegate.swift */; };
+		D156FEB12D021C3B00860999 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEB02D021C3B00860999 /* SceneDelegate.swift */; };
+		D156FEB32D021C3B00860999 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEB22D021C3B00860999 /* ViewController.swift */; };
+		D156FEB62D021C3B00860999 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D156FEB42D021C3B00860999 /* Main.storyboard */; };
+		D156FEB82D021C3C00860999 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D156FEB72D021C3C00860999 /* Assets.xcassets */; };
+		D156FEBB2D021C3C00860999 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D156FEB92D021C3C00860999 /* LaunchScreen.storyboard */; };
+		D156FEC62D021C3C00860999 /* OpenSkyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEC52D021C3C00860999 /* OpenSkyTests.swift */; };
+		D156FED02D021C3C00860999 /* OpenSkyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FECF2D021C3C00860999 /* OpenSkyUITests.swift */; };
+		D156FED22D021C3C00860999 /* OpenSkyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FED12D021C3C00860999 /* OpenSkyUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D156FEC22D021C3C00860999 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D156FEA32D021C3B00860999 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D156FEAA2D021C3B00860999;
+			remoteInfo = OpenSky;
+		};
+		D156FECC2D021C3C00860999 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D156FEA32D021C3B00860999 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D156FEAA2D021C3B00860999;
+			remoteInfo = OpenSky;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D156FEAB2D021C3B00860999 /* OpenSky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSky.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D156FEAE2D021C3B00860999 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D156FEB02D021C3B00860999 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		D156FEB22D021C3B00860999 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D156FEB52D021C3B00860999 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D156FEB72D021C3C00860999 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D156FEBA2D021C3C00860999 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D156FEBC2D021C3C00860999 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D156FEC12D021C3C00860999 /* OpenSkyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenSkyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D156FEC52D021C3C00860999 /* OpenSkyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSkyTests.swift; sourceTree = "<group>"; };
+		D156FECB2D021C3C00860999 /* OpenSkyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenSkyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D156FECF2D021C3C00860999 /* OpenSkyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSkyUITests.swift; sourceTree = "<group>"; };
+		D156FED12D021C3C00860999 /* OpenSkyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSkyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D156FEA82D021C3B00860999 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D156FEBE2D021C3C00860999 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D156FEC82D021C3C00860999 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D156FEA22D021C3B00860999 = {
+			isa = PBXGroup;
+			children = (
+				D156FEAD2D021C3B00860999 /* OpenSky */,
+				D156FEC42D021C3C00860999 /* OpenSkyTests */,
+				D156FECE2D021C3C00860999 /* OpenSkyUITests */,
+				D156FEAC2D021C3B00860999 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D156FEAC2D021C3B00860999 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D156FEAB2D021C3B00860999 /* OpenSky.app */,
+				D156FEC12D021C3C00860999 /* OpenSkyTests.xctest */,
+				D156FECB2D021C3C00860999 /* OpenSkyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D156FEAD2D021C3B00860999 /* OpenSky */ = {
+			isa = PBXGroup;
+			children = (
+				D156FEAE2D021C3B00860999 /* AppDelegate.swift */,
+				D156FEB02D021C3B00860999 /* SceneDelegate.swift */,
+				D156FEB22D021C3B00860999 /* ViewController.swift */,
+				D156FEB42D021C3B00860999 /* Main.storyboard */,
+				D156FEB72D021C3C00860999 /* Assets.xcassets */,
+				D156FEB92D021C3C00860999 /* LaunchScreen.storyboard */,
+				D156FEBC2D021C3C00860999 /* Info.plist */,
+			);
+			path = OpenSky;
+			sourceTree = "<group>";
+		};
+		D156FEC42D021C3C00860999 /* OpenSkyTests */ = {
+			isa = PBXGroup;
+			children = (
+				D156FEC52D021C3C00860999 /* OpenSkyTests.swift */,
+			);
+			path = OpenSkyTests;
+			sourceTree = "<group>";
+		};
+		D156FECE2D021C3C00860999 /* OpenSkyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D156FECF2D021C3C00860999 /* OpenSkyUITests.swift */,
+				D156FED12D021C3C00860999 /* OpenSkyUITestsLaunchTests.swift */,
+			);
+			path = OpenSkyUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D156FEAA2D021C3B00860999 /* OpenSky */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D156FED52D021C3C00860999 /* Build configuration list for PBXNativeTarget "OpenSky" */;
+			buildPhases = (
+				D156FEA72D021C3B00860999 /* Sources */,
+				D156FEA82D021C3B00860999 /* Frameworks */,
+				D156FEA92D021C3B00860999 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenSky;
+			productName = OpenSky;
+			productReference = D156FEAB2D021C3B00860999 /* OpenSky.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D156FEC02D021C3C00860999 /* OpenSkyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D156FED82D021C3C00860999 /* Build configuration list for PBXNativeTarget "OpenSkyTests" */;
+			buildPhases = (
+				D156FEBD2D021C3C00860999 /* Sources */,
+				D156FEBE2D021C3C00860999 /* Frameworks */,
+				D156FEBF2D021C3C00860999 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D156FEC32D021C3C00860999 /* PBXTargetDependency */,
+			);
+			name = OpenSkyTests;
+			productName = OpenSkyTests;
+			productReference = D156FEC12D021C3C00860999 /* OpenSkyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D156FECA2D021C3C00860999 /* OpenSkyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D156FEDB2D021C3C00860999 /* Build configuration list for PBXNativeTarget "OpenSkyUITests" */;
+			buildPhases = (
+				D156FEC72D021C3C00860999 /* Sources */,
+				D156FEC82D021C3C00860999 /* Frameworks */,
+				D156FEC92D021C3C00860999 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D156FECD2D021C3C00860999 /* PBXTargetDependency */,
+			);
+			name = OpenSkyUITests;
+			productName = OpenSkyUITests;
+			productReference = D156FECB2D021C3C00860999 /* OpenSkyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D156FEA32D021C3B00860999 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					D156FEAA2D021C3B00860999 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					D156FEC02D021C3C00860999 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = D156FEAA2D021C3B00860999;
+					};
+					D156FECA2D021C3C00860999 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = D156FEAA2D021C3B00860999;
+					};
+				};
+			};
+			buildConfigurationList = D156FEA62D021C3B00860999 /* Build configuration list for PBXProject "OpenSky" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D156FEA22D021C3B00860999;
+			productRefGroup = D156FEAC2D021C3B00860999 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D156FEAA2D021C3B00860999 /* OpenSky */,
+				D156FEC02D021C3C00860999 /* OpenSkyTests */,
+				D156FECA2D021C3C00860999 /* OpenSkyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D156FEA92D021C3B00860999 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D156FEBB2D021C3C00860999 /* LaunchScreen.storyboard in Resources */,
+				D156FEB82D021C3C00860999 /* Assets.xcassets in Resources */,
+				D156FEB62D021C3B00860999 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D156FEBF2D021C3C00860999 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D156FEC92D021C3C00860999 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D156FEA72D021C3B00860999 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D156FEB32D021C3B00860999 /* ViewController.swift in Sources */,
+				D156FEAF2D021C3B00860999 /* AppDelegate.swift in Sources */,
+				D156FEB12D021C3B00860999 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D156FEBD2D021C3C00860999 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D156FEC62D021C3C00860999 /* OpenSkyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D156FEC72D021C3C00860999 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D156FED22D021C3C00860999 /* OpenSkyUITestsLaunchTests.swift in Sources */,
+				D156FED02D021C3C00860999 /* OpenSkyUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D156FEC32D021C3C00860999 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D156FEAA2D021C3B00860999 /* OpenSky */;
+			targetProxy = D156FEC22D021C3C00860999 /* PBXContainerItemProxy */;
+		};
+		D156FECD2D021C3C00860999 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D156FEAA2D021C3B00860999 /* OpenSky */;
+			targetProxy = D156FECC2D021C3C00860999 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D156FEB42D021C3B00860999 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D156FEB52D021C3B00860999 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D156FEB92D021C3C00860999 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D156FEBA2D021C3C00860999 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D156FED32D021C3C00860999 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D156FED42D021C3C00860999 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D156FED62D021C3C00860999 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N9KA4ZJ6RM;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OpenSky/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ealpago.OpenSky;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D156FED72D021C3C00860999 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N9KA4ZJ6RM;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OpenSky/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ealpago.OpenSky;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D156FED92D021C3C00860999 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N9KA4ZJ6RM;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ealpago.OpenSkyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenSky.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OpenSky";
+			};
+			name = Debug;
+		};
+		D156FEDA2D021C3C00860999 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N9KA4ZJ6RM;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ealpago.OpenSkyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenSky.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OpenSky";
+			};
+			name = Release;
+		};
+		D156FEDC2D021C3C00860999 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N9KA4ZJ6RM;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ealpago.OpenSkyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OpenSky;
+			};
+			name = Debug;
+		};
+		D156FEDD2D021C3C00860999 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N9KA4ZJ6RM;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ealpago.OpenSkyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OpenSky;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D156FEA62D021C3B00860999 /* Build configuration list for PBXProject "OpenSky" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D156FED32D021C3C00860999 /* Debug */,
+				D156FED42D021C3C00860999 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D156FED52D021C3C00860999 /* Build configuration list for PBXNativeTarget "OpenSky" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D156FED62D021C3C00860999 /* Debug */,
+				D156FED72D021C3C00860999 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D156FED82D021C3C00860999 /* Build configuration list for PBXNativeTarget "OpenSkyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D156FED92D021C3C00860999 /* Debug */,
+				D156FEDA2D021C3C00860999 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D156FEDB2D021C3C00860999 /* Build configuration list for PBXNativeTarget "OpenSkyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D156FEDC2D021C3C00860999 /* Debug */,
+				D156FEDD2D021C3C00860999 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D156FEA32D021C3B00860999 /* Project object */;
+}
