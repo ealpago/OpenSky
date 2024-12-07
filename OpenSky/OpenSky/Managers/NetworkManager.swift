@@ -1,14 +1,14 @@
 import Foundation
 
-protocol NetworkManagerInterface {
+protocol NetworkManagerProtocol {
     func request<T: Codable>(
-        route: NetworkRoute,
+        request: BaseRequest,
         responseModel: T.Type,
         completion: @escaping (Result<T, NetworkError>) -> Void
     )
 }
 
-final class NetworkManager: NetworkManagerInterface {
+final class NetworkManager: NetworkManagerProtocol {
     static let shared = NetworkManager(session: URLSession(configuration: .default))
     private let session: URLSession
 
@@ -16,29 +16,33 @@ final class NetworkManager: NetworkManagerInterface {
         self.session = session
     }
 
-    func request<T: Codable>(
-        route: NetworkRoute,
+    func request<T: Decodable>(
+        request: BaseRequest,
         responseModel: T.Type,
         completion: @escaping (Result<T, NetworkError>) -> Void
     ) {
-        guard let url = URL(string: route.path) else {
+        var urlComponents = URLComponents(string: request.path)
+        if let queryParameters = request.queryParameters {
+            urlComponents?.queryItems = queryParameters.compactMap { key, value in
+                guard let value = value else { return nil }
+                return URLQueryItem(name: key, value: "\(value)")
+            }
+        }
+        guard let url = urlComponents?.url else {
             completion(.failure(.invalidURL))
             return
         }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = route.method.rawValue
-        if let headers = route.headers {
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = request.method.rawValue
+        if let headers = request.headers {
             for (key, value) in headers {
-                request.addValue(value, forHTTPHeaderField: key)
+                urlRequest.addValue(value, forHTTPHeaderField: key)
             }
         }
-        request.httpBody = route.body
-
-        let task = session.dataTask(with: request) { data, response, error in
+        urlRequest.httpBody = request.body
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             DispatchQueue.main.async {
-                if let error = error {
-                    print("Network Error: \(error)")
+                if error != nil {
                     completion(.failure(.requestFailed))
                     return
                 }

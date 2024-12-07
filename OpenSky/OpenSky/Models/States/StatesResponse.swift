@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OpenSkyResponse: Codable {
+struct StatesResponse: Codable {
     let time: Int
     let states: [FlightState]
 }
