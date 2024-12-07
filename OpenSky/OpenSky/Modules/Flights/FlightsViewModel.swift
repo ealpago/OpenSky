@@ -7,7 +7,9 @@
 
 import Foundation
 
-protocol FlightsViewModelInterface {}
+protocol FlightsViewModelInterface {
+    func viewDidLoad()
+}
 
 final class FlightsViewModel {
 
@@ -17,5 +19,11 @@ final class FlightsViewModel {
     init(view: FlightsViewInterface?, networkManager: NetworkManager = NetworkManager.shared) {
         self.view = view
         self.networkManager = networkManager
+    }
+}
+
+extension FlightsViewModel: FlightsViewModelInterface {
+    func viewDidLoad() {
+        view?.setupUI()
     }
 }

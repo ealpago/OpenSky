@@ -6,17 +6,30 @@
 //
 
 import UIKit
+import MapKit
 
-protocol FlightsViewInterface: AnyObject {}
+protocol FlightsViewInterface: AnyObject {
+    func setupUI()
+}
 
 class FlightsViewController: UIViewController {
+
+    @IBOutlet private weak var mapView: MKMapView!
+    @IBOutlet private weak var countriesButton: UIButton!
 
     private lazy var viewModel = FlightsViewModel(view: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.viewDidLoad()
     }
-    
 }
 
-extension FlightsViewController: FlightsViewInterface {}
+extension FlightsViewController: MKMapViewDelegate {}
+
+extension FlightsViewController: FlightsViewInterface {
+    func setupUI() {
+        mapView.delegate = self
+        countriesButton.layer.cornerRadius = countriesButton.frame.height / 2
+    }
+}
