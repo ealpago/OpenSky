@@ -17,8 +17,12 @@
 		D156FEE62D02256300860999 /* FlightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEE52D02256300860999 /* FlightsViewController.swift */; };
 		D156FEE82D02257000860999 /* FlightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEE72D02257000860999 /* FlightsViewModel.swift */; };
 		D156FEEA2D02258200860999 /* FlightsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D156FEE92D02258200860999 /* FlightsStoryboard.storyboard */; };
-		D156FEEC2D0235C500860999 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEEB2D0235C500860999 /* Constants.swift */; };
 		D156FEEF2D023E1B00860999 /* OpenSkyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEEE2D023E1B00860999 /* OpenSkyResponse.swift */; };
+		D156FEF12D03CBD400860999 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF02D03CBD400860999 /* NetworkManager.swift */; };
+		D156FEF32D03CFBA00860999 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF22D03CFBA00860999 /* NetworkError.swift */; };
+		D156FEF52D03CFE800860999 /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF42D03CFE800860999 /* HTTPMethods.swift */; };
+		D156FEF72D03D01F00860999 /* NetworkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF62D03D01F00860999 /* NetworkRoute.swift */; };
+		D156FEF92D03D07800860999 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF82D03D07800860999 /* APIConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +57,12 @@
 		D156FEE52D02256300860999 /* FlightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightsViewController.swift; sourceTree = "<group>"; };
 		D156FEE72D02257000860999 /* FlightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightsViewModel.swift; sourceTree = "<group>"; };
 		D156FEE92D02258200860999 /* FlightsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FlightsStoryboard.storyboard; sourceTree = "<group>"; };
-		D156FEEB2D0235C500860999 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D156FEEE2D023E1B00860999 /* OpenSkyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSkyResponse.swift; sourceTree = "<group>"; };
+		D156FEF02D03CBD400860999 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		D156FEF22D03CFBA00860999 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		D156FEF42D03CFE800860999 /* HTTPMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
+		D156FEF62D03D01F00860999 /* NetworkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRoute.swift; sourceTree = "<group>"; };
+		D156FEF82D03D07800860999 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +163,6 @@
 		D156FEE02D02231600860999 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				D156FEEB2D0235C500860999 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -170,6 +177,11 @@
 		D156FEE22D02233000860999 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D156FEF02D03CBD400860999 /* NetworkManager.swift */,
+				D156FEF22D03CFBA00860999 /* NetworkError.swift */,
+				D156FEF62D03D01F00860999 /* NetworkRoute.swift */,
+				D156FEF42D03CFE800860999 /* HTTPMethods.swift */,
+				D156FEF82D03D07800860999 /* APIConstants.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -323,9 +335,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D156FEEC2D0235C500860999 /* Constants.swift in Sources */,
+				D156FEF92D03D07800860999 /* APIConstants.swift in Sources */,
+				D156FEF32D03CFBA00860999 /* NetworkError.swift in Sources */,
+				D156FEF72D03D01F00860999 /* NetworkRoute.swift in Sources */,
 				D156FEE62D02256300860999 /* FlightsViewController.swift in Sources */,
 				D156FEAF2D021C3B00860999 /* AppDelegate.swift in Sources */,
+				D156FEF12D03CBD400860999 /* NetworkManager.swift in Sources */,
+				D156FEF52D03CFE800860999 /* HTTPMethods.swift in Sources */,
 				D156FEEF2D023E1B00860999 /* OpenSkyResponse.swift in Sources */,
 				D156FEE82D02257000860999 /* FlightsViewModel.swift in Sources */,
 				D156FEB12D021C3B00860999 /* SceneDelegate.swift in Sources */,
