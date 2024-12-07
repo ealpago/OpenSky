@@ -12,19 +12,26 @@ struct StatesRequest: BaseRequest {
     let lamin: Double
     let lomax: Double
     let lamax: Double
-
+    
     var path: String {
         return APIConstants.shared.openSkyBaseURL + "/states/all"
     }
-
+    
     var method: HTTPMethods {
         return .get
     }
-
+    
     var headers: [String: String]? {
-        return ["Authorization": "Basic " + ("Alpago:Ea184822").data(using: .utf8)!.base64EncodedString()]
+        guard
+            let username = KeychainManager.retrieve(key: "username"),
+            let password = KeychainManager.retrieve(key: "password")
+        else { return nil }
+        
+        let credentials = "\(username):\(password)"
+        let encodedCredentials = Data(credentials.utf8).base64EncodedString()
+        return ["Authorization": "Basic \(encodedCredentials)"]
     }
-
+    
     var queryParameters: [String : Any?]? {
         return [
             "lomin" : lomin,
@@ -33,7 +40,7 @@ struct StatesRequest: BaseRequest {
             "lamax": lamax
         ]
     }
-
+    
     var body: Data? {
         return nil
     }

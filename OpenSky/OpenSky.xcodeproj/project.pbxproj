@@ -25,6 +25,8 @@
 		D156FEF92D03D07800860999 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF82D03D07800860999 /* APIConstants.swift */; };
 		D156FF002D047A4300860999 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEFF2D047A4300860999 /* BaseRequest.swift */; };
 		D156FF032D047AB000860999 /* StatesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FF022D047AB000860999 /* StatesRequest.swift */; };
+		D156FF082D04D35800860999 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FF072D04D35800860999 /* KeychainManager.swift */; };
+		D156FF0A2D04D40F00860999 /* SetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FF092D04D40F00860999 /* SetupManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		D156FEF82D03D07800860999 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		D156FEFF2D047A4300860999 /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		D156FF022D047AB000860999 /* StatesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesRequest.swift; sourceTree = "<group>"; };
+		D156FF072D04D35800860999 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		D156FF092D04D40F00860999 /* SetupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,8 @@
 		D156FEE02D02231600860999 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D156FF072D04D35800860999 /* KeychainManager.swift */,
+				D156FF092D04D40F00860999 /* SetupManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -349,12 +355,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D156FF082D04D35800860999 /* KeychainManager.swift in Sources */,
 				D156FEF92D03D07800860999 /* APIConstants.swift in Sources */,
 				D156FEF32D03CFBA00860999 /* NetworkError.swift in Sources */,
 				D156FEF72D03D01F00860999 /* NetworkRoute.swift in Sources */,
 				D156FEE62D02256300860999 /* FlightsViewController.swift in Sources */,
 				D156FEAF2D021C3B00860999 /* AppDelegate.swift in Sources */,
 				D156FEF12D03CBD400860999 /* NetworkManager.swift in Sources */,
+				D156FF0A2D04D40F00860999 /* SetupManager.swift in Sources */,
 				D156FEF52D03CFE800860999 /* HTTPMethods.swift in Sources */,
 				D156FF002D047A4300860999 /* BaseRequest.swift in Sources */,
 				D156FEEF2D023E1B00860999 /* StatesResponse.swift in Sources */,
