@@ -13,9 +13,9 @@ struct KeychainKeys {
 }
 
 class SetupManager {
-    private let keychain: KeychainProtocol.Type
+    private let keychain: KeychainManagerInterface.Type
 
-    init(keychain: KeychainProtocol.Type) {
+    init(keychain: KeychainManagerInterface.Type) {
         self.keychain = keychain
     }
 

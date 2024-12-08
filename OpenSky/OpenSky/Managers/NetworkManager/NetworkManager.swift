@@ -1,13 +1,13 @@
 import Foundation
 
-protocol NetworkManagerProtocol {
+protocol NetworkManagerInterface {
     func request<T: Decodable>(
         request: BaseRequest,
         responseModel: T.Type
     ) async throws -> T
 }
 
-final class NetworkManager: NetworkManagerProtocol {
+final class NetworkManager: NetworkManagerInterface {
     static let shared = NetworkManager(session: URLSession(configuration: .default))
     private let session: URLSession
 

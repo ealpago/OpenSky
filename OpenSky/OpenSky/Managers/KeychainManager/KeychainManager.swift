@@ -8,12 +8,12 @@
 import Foundation
 import Security
 
-protocol KeychainProtocol {
+protocol KeychainManagerInterface {
     static func save(key: String, value: String) -> Bool
     static func retrieve(key: String) -> String?
 }
 
-class KeychainManager: KeychainProtocol {
+class KeychainManager: KeychainManagerInterface {
     static func save(key: String, value: String) -> Bool {
         let data = Data(value.utf8)
         let query: [String: Any] = [
