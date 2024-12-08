@@ -31,7 +31,12 @@ protocol FlightsViewModelInterface {
 
 extension FlightsViewModel {
     enum Constant {
-        static let showAllDataIndex = 0
+        static let errorTitle: String = "Error"
+        static let errorOkButtonTitle: String = "OK"
+        static let pickerViewShowAllTitle: String = "Show All"
+        static let showAllDataIndex: Int = 0
+        static let numberOfComponents: Int = 1
+        static let timeIntervalSince: Double = 5.0
     }
 }
 
@@ -62,10 +67,10 @@ final class FlightsViewModel {
             switch result {
             case .success(let response):
                 self.states = response.states
-                self.mappedCountries = ["Show All"] + Array(Set(response.states.map { $0.origin_country ?? "" })).sorted()
+                self.mappedCountries = [Constant.pickerViewShowAllTitle] + Array(Set(response.states.map { $0.origin_country ?? "" })).sorted()
                 completion()
             case .failure(let error):
-                view?.showError(title: "Error", message: error.localizedDescription, buttonTitle: "OK", completion: {})
+                view?.showError(title: Constant.errorTitle, message: error.localizedDescription, buttonTitle: Constant.errorOkButtonTitle, completion: {})
             }
         }
     }
@@ -101,18 +106,18 @@ extension FlightsViewModel: FlightsViewModelInterface {
     func regionDidChangeAnimated() {
         lastChangeTimestamp = Date()
     }
-    
+
     var request: StatesRequest {
         let boundingBox = getCurrentState()
         return StatesRequest(lomin: boundingBox?.lomin, lamin: boundingBox?.lamin, lomax: boundingBox?.lomax, lamax: boundingBox?.lamax)
     }
-    
+
     var numberOfRowsInComponent: Int {
         mappedCountries.count
     }
 
     var numberOfComponents: Int {
-        1
+        Constant.numberOfComponents
     }
 
     func viewDidLoad() {
@@ -127,9 +132,9 @@ extension FlightsViewModel: FlightsViewModelInterface {
     func getCurrentState() -> (lomin: Double, lamin: Double, lomax: Double, lamax: Double)? {
         let region = view?.region
         guard let centerLatitude = region?.center.latitude,
-        let centerLongitude = region?.center.longitude,
-        let latitudeDelta = region?.span.latitudeDelta,
-        let longitudeDelta = region?.span.longitudeDelta else {return nil}
+              let centerLongitude = region?.center.longitude,
+              let latitudeDelta = region?.span.latitudeDelta,
+              let longitudeDelta = region?.span.longitudeDelta else {return nil}
         let lamin = centerLatitude - (latitudeDelta / 2)
         let lamax = centerLatitude + (latitudeDelta / 2)
         let lomin = centerLongitude - (longitudeDelta / 2)
@@ -188,20 +193,16 @@ extension FlightsViewModel: FlightsViewModelInterface {
         let currentRegion = view?.region
 
         if let lastRegion = lastVisibleRegion,
-           lastRegion.center.latitude == currentRegion?.center.latitude &&
+            lastRegion.center.latitude == currentRegion?.center.latitude &&
             lastRegion.center.longitude == currentRegion?.center.longitude &&
             lastRegion.span.latitudeDelta == currentRegion?.span.latitudeDelta &&
             lastRegion.span.longitudeDelta == currentRegion?.span.longitudeDelta {
-            // The region has not changed
             if let lastTimestamp = lastChangeTimestamp,
-               Date().timeIntervalSince(lastTimestamp) >= 5.0 {
-                // Region is stable for 5 seconds, trigger the update
+               Date().timeIntervalSince(lastTimestamp) >= Constant.timeIntervalSince {
                 fetchUpdatedData()
-                lastChangeTimestamp = Date() // Reset the timestamp to avoid repeated updates
+                lastChangeTimestamp = Date()
             }
         } else {
-            // The region has changed, reset the timer
-            print("Region has changed")
             lastVisibleRegion = currentRegion
             lastChangeTimestamp = Date()
         }
