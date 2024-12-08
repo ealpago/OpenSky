@@ -15,7 +15,6 @@ protocol FlightsViewModelInterface {
     var request: StatesRequest { get }
     func viewDidLoad()
     func getCurrentState() -> (lomin: Double, lamin: Double, lomax: Double, lamax: Double)?
-    func setMapView()
     func showFlightsButtonTapped()
     func filterCountriesButtonTapped()
     func pickerCancelButtonTapped()
@@ -47,7 +46,6 @@ final class FlightsViewModel {
     private var filteredFlights: [FlightState] = []
     private var mappedCountries: [String] = []
     private var timer: Timer?
-    private var isFiltered: Bool = false
     private var lastVisibleRegion: MKCoordinateRegion?
     private var lastChangeTimestamp: Date?
     private var regionCheckTimer: Timer?
@@ -124,7 +122,7 @@ extension FlightsViewModel: FlightsViewModelInterface {
         view?.setupUI()
         view?.setupPickerView()
         fetchStates(request: request) { [weak self] in
-            self?.setMapView()
+            self?.view?.addAnnotationsToMap()
             self?.startTimer()
         }
     }
@@ -142,14 +140,10 @@ extension FlightsViewModel: FlightsViewModelInterface {
         return (lomin, lamin, lomax, lamax)
     }
 
-    func setMapView() {
-        view?.addAnnotationsToMap()
-    }
-
     func showFlightsButtonTapped() {
-        isFiltered = false
+        selectedCountry = nil
         fetchStates(request: request) { [weak self] in
-            self?.setMapView()
+            self?.view?.addAnnotationsToMap()
             self?.timerInvalid()
         }
     }
@@ -173,16 +167,14 @@ extension FlightsViewModel: FlightsViewModelInterface {
     func fetchUpdatedData() {
         fetchStates(request: request) { [weak self] in
             guard let self = self else { return }
-            isFiltered ? view?.addAnnotationsToMap() : setMapView()
+            view?.addAnnotationsToMap()
         }
     }
 
     func filterDataWithSelectedCountry(selectedRow: Int) {
         if selectedRow == Constant.showAllDataIndex {
-            setMapView()
-            isFiltered = false
+            selectedCountry = nil
         } else {
-            isFiltered = true
             let selectedCountry = mappedCountries[selectedRow]
             self.selectedCountry = selectedCountry
             view?.addAnnotationsToMap()
@@ -191,7 +183,6 @@ extension FlightsViewModel: FlightsViewModelInterface {
 
     @objc func checkRegionStability() {
         let currentRegion = view?.region
-
         if let lastRegion = lastVisibleRegion,
             lastRegion.center.latitude == currentRegion?.center.latitude &&
             lastRegion.center.longitude == currentRegion?.center.longitude &&
