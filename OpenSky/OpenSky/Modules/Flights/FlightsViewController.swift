@@ -10,6 +10,7 @@ import MapKit
 
 protocol FlightsViewInterface: ProgressIndicatorPresentable, AlertPresentable {
     var region: MKCoordinateRegion { get }
+    
     func setupUI()
     func setupPickerView()
     func addAnnotationsToMap()
@@ -32,28 +33,20 @@ final class FlightsViewController: UIViewController {
         viewModel.viewDidLoad()
     }
 
-    @IBAction private func showFlightsButtonTapped() {
-        viewModel.showFlightsButtonTapped()
-    }
-
-    @IBAction private func filterCountriesButtonTapped() {
-        viewModel.filterCountriesButtonTapped()
-    }
-
-    @objc func checkRegionStability() {
-        viewModel.checkRegionStability()
-    }
-
-    @objc func fetchUpdatedData() {
-        viewModel.fetchUpdatedData()
-    }
-
     @objc func pickerCancelButtonTapped() {
         viewModel.pickerCancelButtonTapped()
     }
 
     @objc func pickerDoneButtonTapped() {
         viewModel.pickerDoneButtonTapped(with: pickerView.selectedRow(inComponent: 0))
+    }
+
+    @IBAction private func showFlightsButtonTapped() {
+        viewModel.showFlightsButtonTapped()
+    }
+
+    @IBAction private func filterCountriesButtonTapped() {
+        viewModel.filterCountriesButtonTapped()
     }
 }
 
@@ -103,12 +96,12 @@ extension FlightsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 extension FlightsViewController: FlightsViewInterface {
-    func removeFromSuperview() {
-        view.subviews.last?.removeFromSuperview()
-    }
-    
     var region: MKCoordinateRegion {
         mapView.region
+    }
+
+    func removeFromSuperview() {
+        view.subviews.last?.removeFromSuperview()
     }
 
     func setupUI() {

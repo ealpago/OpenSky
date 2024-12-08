@@ -20,10 +20,8 @@ protocol FlightsViewModelInterface {
     func pickerCancelButtonTapped()
     func pickerDoneButtonTapped(with selectedRow: Int)
     func regionDidChangeAnimated()
-    func fetchUpdatedData()
     func pickerViewWillAppear()
     func pickerViewDidDisappear()
-    func checkRegionStability()
     func filterDataWithSelectedCountry(selectedRow: Int)
     func titleForRow(row: Int) -> String?
 }
@@ -43,9 +41,7 @@ final class FlightsViewModel {
     private weak var view: FlightsViewInterface?
     private let networkManager: NetworkManager
     private var states: [FlightState] = []
-    private var filteredFlights: [FlightState] = []
     private var mappedCountries: [String] = []
-    private var timer: Timer?
     private var lastVisibleRegion: MKCoordinateRegion?
     private var lastChangeTimestamp: Date?
     private var regionCheckTimer: Timer?
@@ -76,7 +72,7 @@ final class FlightsViewModel {
     private func startTimer() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            regionCheckTimer?.invalidate()  // Invalidate any existing timer
+            regionCheckTimer?.invalidate() 
             regionCheckTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkRegionStability), userInfo: nil, repeats: true)
         }
     }
@@ -85,6 +81,27 @@ final class FlightsViewModel {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             lastVisibleRegion = view?.region
+            lastChangeTimestamp = Date()
+        }
+    }
+
+    @objc func checkRegionStability() {
+        let currentRegion = view?.region
+        if let lastRegion = lastVisibleRegion,
+            lastRegion.center.latitude == currentRegion?.center.latitude &&
+            lastRegion.center.longitude == currentRegion?.center.longitude &&
+            lastRegion.span.latitudeDelta == currentRegion?.span.latitudeDelta &&
+            lastRegion.span.longitudeDelta == currentRegion?.span.longitudeDelta {
+            if let lastTimestamp = lastChangeTimestamp,
+               Date().timeIntervalSince(lastTimestamp) >= Constant.timeIntervalSince {
+                fetchStates(request: request) { [weak self] in
+                    guard let self = self else { return }
+                    view?.addAnnotationsToMap()
+                }
+                lastChangeTimestamp = Date()
+            }
+        } else {
+            lastVisibleRegion = currentRegion
             lastChangeTimestamp = Date()
         }
     }
@@ -164,13 +181,6 @@ extension FlightsViewModel: FlightsViewModelInterface {
         startTimer()
     }
 
-    func fetchUpdatedData() {
-        fetchStates(request: request) { [weak self] in
-            guard let self = self else { return }
-            view?.addAnnotationsToMap()
-        }
-    }
-
     func filterDataWithSelectedCountry(selectedRow: Int) {
         if selectedRow == Constant.showAllDataIndex {
             selectedCountry = nil
@@ -178,24 +188,6 @@ extension FlightsViewModel: FlightsViewModelInterface {
             let selectedCountry = mappedCountries[selectedRow]
             self.selectedCountry = selectedCountry
             view?.addAnnotationsToMap()
-        }
-    }
-
-    @objc func checkRegionStability() {
-        let currentRegion = view?.region
-        if let lastRegion = lastVisibleRegion,
-            lastRegion.center.latitude == currentRegion?.center.latitude &&
-            lastRegion.center.longitude == currentRegion?.center.longitude &&
-            lastRegion.span.latitudeDelta == currentRegion?.span.latitudeDelta &&
-            lastRegion.span.longitudeDelta == currentRegion?.span.longitudeDelta {
-            if let lastTimestamp = lastChangeTimestamp,
-               Date().timeIntervalSince(lastTimestamp) >= Constant.timeIntervalSince {
-                fetchUpdatedData()
-                lastChangeTimestamp = Date()
-            }
-        } else {
-            lastVisibleRegion = currentRegion
-            lastChangeTimestamp = Date()
         }
     }
 
