@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BaseRequest: Encodable {
+protocol BaseRequest: Codable {
     var path: String { get }
     var method: HTTPMethods { get }
     var headers: [String: String]? { get }
