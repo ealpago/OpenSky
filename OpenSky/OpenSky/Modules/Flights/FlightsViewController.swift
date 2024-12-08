@@ -12,9 +12,12 @@ protocol FlightsViewInterface: ProgressIndicatorPresentable {
     var request: StatesRequest { get }
     var selectedOriginCountry: String { get }
     func setupUI()
+    func setupPickerView()
     func addAnnotationsToMap(states: [FlightState])
     func getCurrentState(from mapView: MKMapView) -> (lomin: Double, lamin: Double, lomax: Double, lamax: Double)
+    func startTimer()
     func timerInvalid()
+    func showPickerView()
 }
 
 class FlightsViewController: UIViewController {
@@ -27,12 +30,12 @@ class FlightsViewController: UIViewController {
     @IBOutlet private weak var filterCountriesButton: UIButton!
 
     private lazy var viewModel = FlightsViewModel(view: self)
+    private let pickerView = UIPickerView()
+    private let pickerToolbar = UIToolbar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.viewDidLoad(request: request)
-        regionCheckTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkRegionStability), userInfo: nil, repeats: true)
-
     }
 
     @IBAction private func showFlightsButtonTapped(_ sender: UIButton) {
@@ -40,7 +43,8 @@ class FlightsViewController: UIViewController {
     }
 
     @IBAction private func filterCountriesButtonTapped(_ sender: UIButton) {
-        viewModel.filterCountriesButtonTapped(originCountry: selectedOriginCountry)
+        regionCheckTimer?.invalidate()
+        viewModel.filterCountriesButtonTapped()
     }
 
     @objc func checkRegionStability() {
@@ -48,9 +52,9 @@ class FlightsViewController: UIViewController {
 
         if let lastRegion = lastVisibleRegion,
            lastRegion.center.latitude == currentRegion.center.latitude &&
-           lastRegion.center.longitude == currentRegion.center.longitude &&
-           lastRegion.span.latitudeDelta == currentRegion.span.latitudeDelta &&
-           lastRegion.span.longitudeDelta == currentRegion.span.longitudeDelta {
+            lastRegion.center.longitude == currentRegion.center.longitude &&
+            lastRegion.span.latitudeDelta == currentRegion.span.latitudeDelta &&
+            lastRegion.span.longitudeDelta == currentRegion.span.longitudeDelta {
             // The region has not changed
             if let lastTimestamp = lastChangeTimestamp,
                Date().timeIntervalSince(lastTimestamp) >= 5.0 {
@@ -69,8 +73,16 @@ class FlightsViewController: UIViewController {
         viewModel.fetchUpdatedData(request: request)
     }
 
-    deinit {
-        regionCheckTimer?.invalidate() // Invalidate the timer when the view controller is deinitialized
+    @objc func cancelPicker() {
+        view.subviews.last?.removeFromSuperview()
+        startTimer()
+    }
+
+    @objc func donePicker() {
+        view.subviews.last?.removeFromSuperview()
+        let selectedRow = pickerView.selectedRow(inComponent: 0)
+        viewModel.filterDataWithSelectedCountry(selectedRow: selectedRow)
+        startTimer()
     }
 }
 
@@ -97,7 +109,38 @@ extension FlightsViewController: MKMapViewDelegate {
     }
 }
 
+extension FlightsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        viewModel.numberOfRowsInComponent
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        viewModel.titleForRow(row: row)
+    }
+
+    func pickerViewWillAppear(_ pickerView: UIPickerView) {
+        regionCheckTimer?.invalidate()
+    }
+
+    func pickerViewDidDisappear(_ pickerView: UIPickerView) {
+        startTimer()
+    }
+}
+
 extension FlightsViewController: FlightsViewInterface {
+
+    func startTimer() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            regionCheckTimer?.invalidate()  // Invalidate any existing timer
+            regionCheckTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkRegionStability), userInfo: nil, repeats: true)
+        }
+    }
+
     func timerInvalid() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -105,11 +148,11 @@ extension FlightsViewController: FlightsViewInterface {
             lastChangeTimestamp = Date()
         }
     }
-    
+
     var request: StatesRequest {
         let boundingBox = getCurrentState(from: mapView)
         return StatesRequest(lomin: boundingBox.lomin, lamin: boundingBox.lamin, lomax: boundingBox.lomax, lamax: boundingBox.lamax)
-    }  
+    }
 
     var selectedOriginCountry: String {
         ""
@@ -117,8 +160,19 @@ extension FlightsViewController: FlightsViewInterface {
 
     func setupUI() {
         mapView.delegate = self
+        pickerView.delegate = self
+        pickerView.dataSource = self
         filterCountriesButton.layer.cornerRadius = filterCountriesButton.frame.height / 2
         showFlightsButton.layer.cornerRadius = showFlightsButton.frame.height / 2
+    }
+
+    func setupPickerView() {
+        pickerToolbar.sizeToFit()
+        pickerToolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelPicker)),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePicker))
+        ]
     }
 
     func addAnnotationsToMap(states: [FlightState]) {
@@ -144,5 +198,15 @@ extension FlightsViewController: FlightsViewInterface {
         let lomin = centerLongitude - (longitudeDelta / 2)
         let lomax = centerLongitude + (longitudeDelta / 2)
         return (lomin, lamin, lomax, lamax)
+    }
+
+    func showPickerView() {
+        let pickerContainer = UIView(frame: CGRect(x: 0, y: view.bounds.height - 300, width: view.bounds.width, height: 300))
+        pickerContainer.backgroundColor = .white
+        pickerView.frame = CGRect(x: 0, y: 50, width: view.bounds.width, height: 250)
+        pickerToolbar.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 50)
+        pickerContainer.addSubview(pickerToolbar)
+        pickerContainer.addSubview(pickerView)
+        view.addSubview(pickerContainer)
     }
 }
