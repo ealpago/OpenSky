@@ -148,7 +148,6 @@
 			children = (
 				D156FEE22D02233000860999 /* Managers */,
 				D156FEE32D02233500860999 /* Models */,
-				D156FEE12D02232000860999 /* Extensions */,
 				D156FEE02D02231600860999 /* Helpers */,
 				D156FEDF2D02230300860999 /* Modules */,
 				D156FEDE2D0222F800860999 /* Resources */,
@@ -200,13 +199,6 @@
 				D1358EC32D0502B00066613E /* AlertPresentable.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		D156FEE12D02232000860999 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D156FEE22D02233000860999 /* Managers */ = {

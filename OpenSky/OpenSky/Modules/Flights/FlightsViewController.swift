@@ -8,22 +8,16 @@
 import UIKit
 import MapKit
 
-protocol FlightsViewInterface: ProgressIndicatorPresentable {
-    var request: StatesRequest { get }
-    var selectedOriginCountry: String { get }
+protocol FlightsViewInterface: ProgressIndicatorPresentable, AlertPresentable {
+    var region: MKCoordinateRegion { get }
     func setupUI()
     func setupPickerView()
-    func addAnnotationsToMap(states: [FlightState])
-    func getCurrentState(from mapView: MKMapView) -> (lomin: Double, lamin: Double, lomax: Double, lamax: Double)
-    func startTimer()
-    func timerInvalid()
+    func addAnnotationsToMap()
     func showPickerView()
+    func removeFromSuperview()
 }
 
-class FlightsViewController: UIViewController {
-    var lastVisibleRegion: MKCoordinateRegion?
-    var lastChangeTimestamp: Date?
-    var regionCheckTimer: Timer?
+final class FlightsViewController: UIViewController {
 
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var showFlightsButton: UIButton!
@@ -35,54 +29,31 @@ class FlightsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewDidLoad(request: request)
+        viewModel.viewDidLoad()
     }
 
-    @IBAction private func showFlightsButtonTapped(_ sender: UIButton) {
-        viewModel.showFlightsButtonTapped(request: request)
+    @IBAction private func showFlightsButtonTapped() {
+        viewModel.showFlightsButtonTapped()
     }
 
-    @IBAction private func filterCountriesButtonTapped(_ sender: UIButton) {
-        regionCheckTimer?.invalidate()
+    @IBAction private func filterCountriesButtonTapped() {
         viewModel.filterCountriesButtonTapped()
     }
 
     @objc func checkRegionStability() {
-        let currentRegion = mapView.region
-
-        if let lastRegion = lastVisibleRegion,
-           lastRegion.center.latitude == currentRegion.center.latitude &&
-            lastRegion.center.longitude == currentRegion.center.longitude &&
-            lastRegion.span.latitudeDelta == currentRegion.span.latitudeDelta &&
-            lastRegion.span.longitudeDelta == currentRegion.span.longitudeDelta {
-            // The region has not changed
-            if let lastTimestamp = lastChangeTimestamp,
-               Date().timeIntervalSince(lastTimestamp) >= 5.0 {
-                // Region is stable for 5 seconds, trigger the update
-                viewModel.fetchUpdatedData(request: request)
-                lastChangeTimestamp = Date() // Reset the timestamp to avoid repeated updates
-            }
-        } else {
-            // The region has changed, reset the timer
-            lastVisibleRegion = currentRegion
-            lastChangeTimestamp = Date()
-        }
+        viewModel.checkRegionStability()
     }
 
     @objc func fetchUpdatedData() {
-        viewModel.fetchUpdatedData(request: request)
+        viewModel.fetchUpdatedData()
     }
 
-    @objc func cancelPicker() {
-        view.subviews.last?.removeFromSuperview()
-        startTimer()
+    @objc func pickerCancelButtonTapped() {
+        viewModel.pickerCancelButtonTapped()
     }
 
-    @objc func donePicker() {
-        view.subviews.last?.removeFromSuperview()
-        let selectedRow = pickerView.selectedRow(inComponent: 0)
-        viewModel.filterDataWithSelectedCountry(selectedRow: selectedRow)
-        startTimer()
+    @objc func pickerDoneButtonTapped() {
+        viewModel.pickerDoneButtonTapped(with: pickerView.selectedRow(inComponent: 0))
     }
 }
 
@@ -105,13 +76,13 @@ extension FlightsViewController: MKMapViewDelegate {
     }
 
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        lastChangeTimestamp = Date()
+        viewModel.regionDidChangeAnimated()
     }
 }
 
 extension FlightsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        viewModel.numberOfComponents
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -123,39 +94,21 @@ extension FlightsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerViewWillAppear(_ pickerView: UIPickerView) {
-        regionCheckTimer?.invalidate()
+        viewModel.pickerViewWillAppear()
     }
 
     func pickerViewDidDisappear(_ pickerView: UIPickerView) {
-        startTimer()
+        viewModel.pickerViewDidDisappear()
     }
 }
 
 extension FlightsViewController: FlightsViewInterface {
-
-    func startTimer() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            regionCheckTimer?.invalidate()  // Invalidate any existing timer
-            regionCheckTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkRegionStability), userInfo: nil, repeats: true)
-        }
+    func removeFromSuperview() {
+        view.subviews.last?.removeFromSuperview()
     }
-
-    func timerInvalid() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            lastVisibleRegion = mapView.region
-            lastChangeTimestamp = Date()
-        }
-    }
-
-    var request: StatesRequest {
-        let boundingBox = getCurrentState(from: mapView)
-        return StatesRequest(lomin: boundingBox.lomin, lamin: boundingBox.lamin, lomax: boundingBox.lomax, lamax: boundingBox.lamax)
-    }
-
-    var selectedOriginCountry: String {
-        ""
+    
+    var region: MKCoordinateRegion {
+        mapView.region
     }
 
     func setupUI() {
@@ -169,35 +122,18 @@ extension FlightsViewController: FlightsViewInterface {
     func setupPickerView() {
         pickerToolbar.sizeToFit()
         pickerToolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelPicker)),
+            UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(pickerCancelButtonTapped)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePicker))
+            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(pickerDoneButtonTapped))
         ]
     }
 
-    func addAnnotationsToMap(states: [FlightState]) {
+    func addAnnotationsToMap() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             mapView.removeAnnotations(mapView.annotations)
-            let annotations = states.compactMap { state -> FlightAnnotation? in
-                guard state.latitude != nil && state.longitude != nil else { return nil }
-                return FlightAnnotation(flightState: state)
-            }
-            mapView.addAnnotations(annotations)
+            mapView.addAnnotations(viewModel.annotations)
         }
-    }
-
-    func getCurrentState(from mapView: MKMapView) -> (lomin: Double, lamin: Double, lomax: Double, lamax: Double) {
-        let region = mapView.region
-        let centerLatitude = region.center.latitude
-        let centerLongitude = region.center.longitude
-        let latitudeDelta = region.span.latitudeDelta
-        let longitudeDelta = region.span.longitudeDelta
-        let lamin = centerLatitude - (latitudeDelta / 2)
-        let lamax = centerLatitude + (latitudeDelta / 2)
-        let lomin = centerLongitude - (longitudeDelta / 2)
-        let lomax = centerLongitude + (longitudeDelta / 2)
-        return (lomin, lamin, lomax, lamax)
     }
 
     func showPickerView() {
