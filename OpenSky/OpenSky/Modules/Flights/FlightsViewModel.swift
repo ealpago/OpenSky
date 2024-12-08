@@ -55,15 +55,19 @@ final class FlightsViewModel {
 
     private func fetchStates(request: StatesRequest, completion: @escaping()->()) {
         view?.showLoadingIndicator()
-        networkManager.request(request: request, responseModel: StatesResponse.self) { [weak self] result in
-            guard let self = self else { return }
+        Task {
             self.view?.hideLoadingIndicator()
-            switch result {
-            case .success(let response):
+            do {
+                let response: StatesResponse = try await NetworkManager.shared.request(
+                    request: request,
+                    responseModel: StatesResponse.self
+                )
                 self.states = response.states
                 self.mappedCountries = [Constant.pickerViewShowAllTitle] + Array(Set(response.states.map { $0.origin_country ?? "" })).sorted()
                 completion()
-            case .failure(let error):
+            } catch let error as NetworkError {
+                view?.showError(title: Constant.errorTitle, message: error.localizedDescription, buttonTitle: Constant.errorOkButtonTitle, completion: {})
+            } catch {
                 view?.showError(title: Constant.errorTitle, message: error.localizedDescription, buttonTitle: Constant.errorOkButtonTitle, completion: {})
             }
         }
@@ -72,7 +76,7 @@ final class FlightsViewModel {
     private func startTimer() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            regionCheckTimer?.invalidate() 
+            regionCheckTimer?.invalidate()
             regionCheckTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkRegionStability), userInfo: nil, repeats: true)
         }
     }
@@ -88,7 +92,7 @@ final class FlightsViewModel {
     @objc func checkRegionStability() {
         let currentRegion = view?.region
         if let lastRegion = lastVisibleRegion,
-            lastRegion.center.latitude == currentRegion?.center.latitude &&
+           lastRegion.center.latitude == currentRegion?.center.latitude &&
             lastRegion.center.longitude == currentRegion?.center.longitude &&
             lastRegion.span.latitudeDelta == currentRegion?.span.latitudeDelta &&
             lastRegion.span.longitudeDelta == currentRegion?.span.longitudeDelta {

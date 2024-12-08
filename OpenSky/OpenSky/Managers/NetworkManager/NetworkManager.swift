@@ -1,11 +1,10 @@
 import Foundation
 
 protocol NetworkManagerProtocol {
-    func request<T: Codable>(
+    func request<T: Decodable>(
         request: BaseRequest,
-        responseModel: T.Type,
-        completion: @escaping (Result<T, NetworkError>) -> Void
-    )
+        responseModel: T.Type
+    ) async throws -> T
 }
 
 final class NetworkManager: NetworkManagerProtocol {
@@ -18,9 +17,8 @@ final class NetworkManager: NetworkManagerProtocol {
 
     func request<T: Decodable>(
         request: BaseRequest,
-        responseModel: T.Type,
-        completion: @escaping (Result<T, NetworkError>) -> Void
-    ) {
+        responseModel: T.Type
+    ) async throws -> T {
         var urlComponents = URLComponents(string: request.path)
         if let queryParameters = request.queryParameters {
             urlComponents?.queryItems = queryParameters.compactMap { key, value in
@@ -29,8 +27,7 @@ final class NetworkManager: NetworkManagerProtocol {
             }
         }
         guard let url = urlComponents?.url else {
-            completion(.failure(.invalidURL))
-            return
+            throw NetworkError.invalidURL
         }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
@@ -40,24 +37,18 @@ final class NetworkManager: NetworkManagerProtocol {
             }
         }
         urlRequest.httpBody = request.body
-        let task = session.dataTask(with: urlRequest) { data, response, error in
-            DispatchQueue.main.async {
-                if error != nil {
-                    completion(.failure(.requestFailed))
-                    return
-                }
-                guard let data = data else {
-                    completion(.failure(.requestFailed))
-                    return
-                }
-                do {
-                    let decodedData = try JSONDecoder().decode(T.self, from: data)
-                    completion(.success(decodedData))
-                } catch {
-                    completion(.failure(.decodingError(error)))
-                }
+        do {
+            let (data, response) = try await session.data(for: urlRequest)
+            if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+                throw NetworkError.requestFailed
             }
+            let decodedData = try JSONDecoder().decode(T.self, from: data)
+            return decodedData
+        } catch {
+            if let decodingError = error as? DecodingError {
+                throw NetworkError.decodingError(decodingError)
+            }
+            throw NetworkError.requestFailed
         }
-        task.resume()
     }
 }

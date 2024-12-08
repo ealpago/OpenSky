@@ -23,7 +23,6 @@
 		D156FEF12D03CBD400860999 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF02D03CBD400860999 /* NetworkManager.swift */; };
 		D156FEF32D03CFBA00860999 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF22D03CFBA00860999 /* NetworkError.swift */; };
 		D156FEF52D03CFE800860999 /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF42D03CFE800860999 /* HTTPMethods.swift */; };
-		D156FEF72D03D01F00860999 /* NetworkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF62D03D01F00860999 /* NetworkRoute.swift */; };
 		D156FEF92D03D07800860999 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEF82D03D07800860999 /* APIConstants.swift */; };
 		D156FF002D047A4300860999 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEFF2D047A4300860999 /* BaseRequest.swift */; };
 		D156FF032D047AB000860999 /* StatesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FF022D047AB000860999 /* StatesRequest.swift */; };
@@ -69,7 +68,6 @@
 		D156FEF02D03CBD400860999 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D156FEF22D03CFBA00860999 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D156FEF42D03CFE800860999 /* HTTPMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
-		D156FEF62D03D01F00860999 /* NetworkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRoute.swift; sourceTree = "<group>"; };
 		D156FEF82D03D07800860999 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		D156FEFF2D047A4300860999 /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		D156FF022D047AB000860999 /* StatesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesRequest.swift; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 			children = (
 				D156FEF02D03CBD400860999 /* NetworkManager.swift */,
 				D156FEF22D03CFBA00860999 /* NetworkError.swift */,
-				D156FEF62D03D01F00860999 /* NetworkRoute.swift */,
 				D156FEF42D03CFE800860999 /* HTTPMethods.swift */,
 				D156FEF82D03D07800860999 /* APIConstants.swift */,
 			);
@@ -372,7 +369,6 @@
 				D156FF082D04D35800860999 /* KeychainManager.swift in Sources */,
 				D156FEF92D03D07800860999 /* APIConstants.swift in Sources */,
 				D156FEF32D03CFBA00860999 /* NetworkError.swift in Sources */,
-				D156FEF72D03D01F00860999 /* NetworkRoute.swift in Sources */,
 				D1358EC22D0502070066613E /* ProgressIndicatorPresentable.swift in Sources */,
 				D156FEE62D02256300860999 /* FlightsViewController.swift in Sources */,
 				D156FEAF2D021C3B00860999 /* AppDelegate.swift in Sources */,
