@@ -8,20 +8,21 @@
 import Foundation
 import Security
 
-class KeychainManager {
+protocol KeychainProtocol {
+    static func save(key: String, value: String) -> Bool
+    static func retrieve(key: String) -> String?
+}
+
+class KeychainManager: KeychainProtocol {
     static func save(key: String, value: String) -> Bool {
         let data = Data(value.utf8)
-        // Create query to save the item in Keychain
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
             kSecValueData as String: data
         ]
-        // Delete any existing item with the same key (this avoids duplicates)
         SecItemDelete(query as CFDictionary)
-        // Add the item to the Keychain
         let result = SecItemAdd(query as CFDictionary, nil)
-        // Return true if successful, false otherwise
         return result == errSecSuccess
     }
 

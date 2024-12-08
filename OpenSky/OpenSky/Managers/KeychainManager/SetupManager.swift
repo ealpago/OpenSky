@@ -7,10 +7,21 @@
 
 import Foundation
 
+struct KeychainKeys {
+    static let username = "username"
+    static let password = "password"
+}
+
 class SetupManager {
-    static func configure() {
-        let didSaveUsername = KeychainManager.save(key: "username", value: "Alpago")
-        let didSavePassword = KeychainManager.save(key: "password", value: "Ea184822")
+    private let keychain: KeychainProtocol.Type
+
+    init(keychain: KeychainProtocol.Type) {
+        self.keychain = keychain
+    }
+
+    func configure() {
+        let didSaveUsername = keychain.save(key: KeychainKeys.username, value: "Alpago")
+        let didSavePassword = keychain.save(key: KeychainKeys.password, value: "Ea184822")
 
         if !didSaveUsername || !didSavePassword {
             print("Failed to save credentials to Keychain")
@@ -19,4 +30,3 @@ class SetupManager {
         }
     }
 }
-
