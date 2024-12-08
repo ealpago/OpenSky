@@ -13,10 +13,12 @@ protocol AlertPresentable: AnyObject {
 
 extension AlertPresentable where Self: UIViewController {
     func showError(title: String, message: String, buttonTitle: String, completion: @escaping () -> ()) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: buttonTitle, style: .cancel, handler: { action in
-            completion()
-        }))
-        self.present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: buttonTitle, style: .cancel, handler: { action in
+                completion()
+            }))
+            self.present(alert, animated: true)
+        }
     }
 }
