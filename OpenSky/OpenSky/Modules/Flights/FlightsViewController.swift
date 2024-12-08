@@ -8,6 +8,10 @@
 import UIKit
 import MapKit
 
+
+#warning("I am using Xcode version 15.2. If you use guard let self in this version, you do not need to write extra self. If you are using an older Xcode version, you may get an error.")
+
+
 protocol FlightsViewInterface: ProgressIndicatorPresentable, AlertPresentable {
     var region: MKCoordinateRegion { get }
     

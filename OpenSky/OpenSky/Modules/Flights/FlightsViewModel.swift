@@ -101,9 +101,8 @@ final class FlightsViewModel {
 
     private func timerInvalid() {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            lastVisibleRegion = view?.region
-            lastChangeTimestamp = Date()
+            self?.lastVisibleRegion = self?.view?.region
+            self?.lastChangeTimestamp = Date()
         }
     }
 
@@ -117,8 +116,7 @@ final class FlightsViewModel {
             if let lastTimestamp = lastChangeTimestamp,
                Date().timeIntervalSince(lastTimestamp) >= Constant.timeIntervalSince {
                 fetchStates(request: request) { [weak self] in
-                    guard let self = self else { return }
-                    view?.addAnnotationsToMap()
+                    self?.view?.addAnnotationsToMap()
                 }
                 lastChangeTimestamp = Date()
             }
