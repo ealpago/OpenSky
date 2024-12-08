@@ -3,4 +3,70 @@
    uuid = "44DFA19E-F528-4620-89B9-96137C404466"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D9BAA795-8960-416A-9B8F-35B988061C08"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OpenSky/Managers/NetworkManager/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "request(request:responseModel:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D9BAA795-8960-416A-9B8F-35B988061C08 - c460de850c9a60a9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OpenSky.NetworkManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(request: OpenSky.BaseRequest, responseModel: &#x3c4;_0_0.Type, completion: (Swift.Result&lt;&#x3c4;_0_0, OpenSky.NetworkError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "OpenSky"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emrealpago/I%CC%87OS%20Development/Personal%20Projects/OpenSky/OpenSky/OpenSky/Managers/NetworkManager/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "2480">
+               </Location>
+               <Location
+                  uuid = "D9BAA795-8960-416A-9B8F-35B988061C08 - d1edbe7c4b69caf7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in OpenSky.NetworkManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(request: OpenSky.BaseRequest, responseModel: &#x3c4;_0_0.Type, completion: (Swift.Result&lt;&#x3c4;_0_0, OpenSky.NetworkError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "OpenSky"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emrealpago/I%CC%87OS%20Development/Personal%20Projects/OpenSky/OpenSky/OpenSky/Managers/NetworkManager/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "248">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "89413C95-F542-47F2-B2EE-3289D76C3C0E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OpenSky/Modules/Flights/FlightsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "fetchStates(request:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

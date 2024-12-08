@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D1358EC22D0502070066613E /* ProgressIndicatorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1358EC12D0502070066613E /* ProgressIndicatorPresentable.swift */; };
+		D1358EC42D0502B00066613E /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1358EC32D0502B00066613E /* AlertPresentable.swift */; };
 		D156FEAF2D021C3B00860999 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEAE2D021C3B00860999 /* AppDelegate.swift */; };
 		D156FEB12D021C3B00860999 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FEB02D021C3B00860999 /* SceneDelegate.swift */; };
 		D156FEB82D021C3C00860999 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D156FEB72D021C3C00860999 /* Assets.xcassets */; };
@@ -47,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D1358EC12D0502070066613E /* ProgressIndicatorPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicatorPresentable.swift; sourceTree = "<group>"; };
+		D1358EC32D0502B00066613E /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
 		D156FEAB2D021C3B00860999 /* OpenSky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D156FEAE2D021C3B00860999 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D156FEB02D021C3B00860999 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +102,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D1358EBF2D0501660066613E /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				D156FEF02D03CBD400860999 /* NetworkManager.swift */,
+				D156FEF22D03CFBA00860999 /* NetworkError.swift */,
+				D156FEF62D03D01F00860999 /* NetworkRoute.swift */,
+				D156FEF42D03CFE800860999 /* HTTPMethods.swift */,
+				D156FEF82D03D07800860999 /* APIConstants.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		D1358EC02D0501770066613E /* KeychainManager */ = {
+			isa = PBXGroup;
+			children = (
+				D156FF072D04D35800860999 /* KeychainManager.swift */,
+				D156FF092D04D40F00860999 /* SetupManager.swift */,
+			);
+			path = KeychainManager;
+			sourceTree = "<group>";
+		};
 		D156FEA22D021C3B00860999 = {
 			isa = PBXGroup;
 			children = (
@@ -171,8 +196,8 @@
 		D156FEE02D02231600860999 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				D156FF072D04D35800860999 /* KeychainManager.swift */,
-				D156FF092D04D40F00860999 /* SetupManager.swift */,
+				D1358EC12D0502070066613E /* ProgressIndicatorPresentable.swift */,
+				D1358EC32D0502B00066613E /* AlertPresentable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -187,11 +212,8 @@
 		D156FEE22D02233000860999 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				D156FEF02D03CBD400860999 /* NetworkManager.swift */,
-				D156FEF22D03CFBA00860999 /* NetworkError.swift */,
-				D156FEF62D03D01F00860999 /* NetworkRoute.swift */,
-				D156FEF42D03CFE800860999 /* HTTPMethods.swift */,
-				D156FEF82D03D07800860999 /* APIConstants.swift */,
+				D1358EBF2D0501660066613E /* NetworkManager */,
+				D1358EC02D0501770066613E /* KeychainManager */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -359,6 +381,7 @@
 				D156FEF92D03D07800860999 /* APIConstants.swift in Sources */,
 				D156FEF32D03CFBA00860999 /* NetworkError.swift in Sources */,
 				D156FEF72D03D01F00860999 /* NetworkRoute.swift in Sources */,
+				D1358EC22D0502070066613E /* ProgressIndicatorPresentable.swift in Sources */,
 				D156FEE62D02256300860999 /* FlightsViewController.swift in Sources */,
 				D156FEAF2D021C3B00860999 /* AppDelegate.swift in Sources */,
 				D156FEF12D03CBD400860999 /* NetworkManager.swift in Sources */,
@@ -368,6 +391,7 @@
 				D156FEEF2D023E1B00860999 /* StatesResponse.swift in Sources */,
 				D156FEE82D02257000860999 /* FlightsViewModel.swift in Sources */,
 				D156FF032D047AB000860999 /* StatesRequest.swift in Sources */,
+				D1358EC42D0502B00066613E /* AlertPresentable.swift in Sources */,
 				D156FEB12D021C3B00860999 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
