@@ -32,6 +32,25 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="mappin.square.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="showFlightsButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HcB-nB-9jx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3e-VN-V2v">
+                                <rect key="frame" x="12" y="746" width="60" height="60"/>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="PNZ-i3-c2h"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Qo6-Uw-Atw"/>
+                                    <constraint firstAttribute="width" constant="60" id="mxF-o7-uqD"/>
+                                    <constraint firstAttribute="height" constant="60" id="p53-ld-xEH"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="filterCountriesButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="mFh-jw-plM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -40,14 +59,17 @@
                             <constraint firstAttribute="bottom" secondItem="3YZ-c8-6rL" secondAttribute="bottom" id="2OM-2G-nLf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="A0x-Qz-b5P" secondAttribute="trailing" constant="12" id="2TA-PG-Qox"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3YZ-c8-6rL" secondAttribute="trailing" id="3vu-GU-Q5L"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="o3e-VN-V2v" secondAttribute="bottom" constant="12" id="Rly-eD-ABy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="A0x-Qz-b5P" secondAttribute="bottom" constant="12" id="oX7-ih-o9F"/>
                             <constraint firstItem="3YZ-c8-6rL" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="wkb-u6-kuB"/>
+                            <constraint firstItem="o3e-VN-V2v" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="12" id="x1h-c9-H5J"/>
                             <constraint firstItem="3YZ-c8-6rL" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="xeI-MR-wZW"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="countriesButton" destination="A0x-Qz-b5P" id="Fm3-uE-t73"/>
+                        <outlet property="filterCountriesButton" destination="o3e-VN-V2v" id="qRl-RU-o81"/>
                         <outlet property="mapView" destination="3YZ-c8-6rL" id="bmI-3p-o4f"/>
+                        <outlet property="showFlightsButton" destination="A0x-Qz-b5P" id="ga6-f3-LsK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -56,6 +78,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="magnifyingglass.circle.fill" catalog="system" width="128" height="123"/>
         <image name="mappin.square.fill" catalog="system" width="128" height="114"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

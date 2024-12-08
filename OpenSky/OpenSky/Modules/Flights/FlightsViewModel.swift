@@ -10,6 +10,8 @@ import Foundation
 protocol FlightsViewModelInterface {
     func viewDidLoad(request: StatesRequest)
     func setMapView()
+    func showFlightsButtonTapped(request: StatesRequest)
+    func filterCountriesButtonTapped(originCountry: String?)
 }
 
 final class FlightsViewModel {
@@ -50,4 +52,14 @@ extension FlightsViewModel: FlightsViewModelInterface {
     func setMapView() {
         view?.addAnnotationsToMap(states: states)
     }
+
+    func showFlightsButtonTapped(request: StatesRequest) {
+        fetchStates(request: request) { [weak self] in
+            guard let self = self else { return }
+            self.setMapView()
+        }
+    }
+
+    func filterCountriesButtonTapped(originCountry: String?) {}
+
 }
