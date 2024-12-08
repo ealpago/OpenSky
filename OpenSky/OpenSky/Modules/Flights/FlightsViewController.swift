@@ -14,9 +14,13 @@ protocol FlightsViewInterface: ProgressIndicatorPresentable {
     func setupUI()
     func addAnnotationsToMap(states: [FlightState])
     func getCurrentState(from mapView: MKMapView) -> (lomin: Double, lamin: Double, lomax: Double, lamax: Double)
+    func timerInvalid()
 }
 
 class FlightsViewController: UIViewController {
+    var lastVisibleRegion: MKCoordinateRegion?
+    var lastChangeTimestamp: Date?
+    var regionCheckTimer: Timer?
 
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var showFlightsButton: UIButton!
@@ -27,6 +31,8 @@ class FlightsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.viewDidLoad(request: request)
+        regionCheckTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkRegionStability), userInfo: nil, repeats: true)
+
     }
 
     @IBAction private func showFlightsButtonTapped(_ sender: UIButton) {
@@ -35,6 +41,36 @@ class FlightsViewController: UIViewController {
 
     @IBAction private func filterCountriesButtonTapped(_ sender: UIButton) {
         viewModel.filterCountriesButtonTapped(originCountry: selectedOriginCountry)
+    }
+
+    @objc func checkRegionStability() {
+        let currentRegion = mapView.region
+
+        if let lastRegion = lastVisibleRegion,
+           lastRegion.center.latitude == currentRegion.center.latitude &&
+           lastRegion.center.longitude == currentRegion.center.longitude &&
+           lastRegion.span.latitudeDelta == currentRegion.span.latitudeDelta &&
+           lastRegion.span.longitudeDelta == currentRegion.span.longitudeDelta {
+            // The region has not changed
+            if let lastTimestamp = lastChangeTimestamp,
+               Date().timeIntervalSince(lastTimestamp) >= 5.0 {
+                // Region is stable for 5 seconds, trigger the update
+                viewModel.fetchUpdatedData(request: request)
+                lastChangeTimestamp = Date() // Reset the timestamp to avoid repeated updates
+            }
+        } else {
+            // The region has changed, reset the timer
+            lastVisibleRegion = currentRegion
+            lastChangeTimestamp = Date()
+        }
+    }
+
+    @objc func fetchUpdatedData() {
+        viewModel.fetchUpdatedData(request: request)
+    }
+
+    deinit {
+        regionCheckTimer?.invalidate() // Invalidate the timer when the view controller is deinitialized
     }
 }
 
@@ -56,9 +92,20 @@ extension FlightsViewController: MKMapViewDelegate {
         return annotationView
     }
 
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        lastChangeTimestamp = Date()
+    }
 }
 
 extension FlightsViewController: FlightsViewInterface {
+    func timerInvalid() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            lastVisibleRegion = mapView.region
+            lastChangeTimestamp = Date()
+        }
+    }
+    
     var request: StatesRequest {
         let boundingBox = getCurrentState(from: mapView)
         return StatesRequest(lomin: boundingBox.lomin, lamin: boundingBox.lamin, lomax: boundingBox.lomax, lamax: boundingBox.lamax)
