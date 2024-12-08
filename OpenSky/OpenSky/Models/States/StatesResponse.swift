@@ -13,7 +13,6 @@ struct StatesResponse: Codable {
     let states: [FlightState]
 }
 
-
 struct FlightState: Codable {
     let icao24: String?
     let callsign: String?
@@ -59,6 +58,9 @@ struct FlightState: Codable {
 
 class FlightAnnotation: NSObject, MKAnnotation {
     let flightState: FlightState
+    let title: String?
+    let subtitle: String?
+
     var coordinate: CLLocationCoordinate2D {
         guard let latitude = flightState.latitude, let longitude = flightState.longitude else {
             return CLLocationCoordinate2D(latitude: 0, longitude: 0)
@@ -66,15 +68,9 @@ class FlightAnnotation: NSObject, MKAnnotation {
         return CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
     }
 
-    var title: String? {
-        return "Flight: \(flightState.icao24 ?? "")"
-    }
-
-    var subtitle: String? {
-        return "Origin: \(flightState.origin_country ?? "")"
-    }
-
     init(flightState: FlightState) {
         self.flightState = flightState
+        self.title = flightState.icao24
+        self.subtitle = flightState.origin_country
     }
 }
