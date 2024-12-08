@@ -57,19 +57,19 @@ struct FlightState: Codable {
 }
 
 class FlightAnnotation: NSObject, MKAnnotation {
-    let flightState: FlightState
+    let latitude: Float
+    let longitude: Float
     let title: String?
     let subtitle: String?
 
     var coordinate: CLLocationCoordinate2D {
-        guard let latitude = flightState.latitude, let longitude = flightState.longitude else {
-            return CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        }
-        return CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+        CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
     }
 
-    init(flightState: FlightState) {
-        self.flightState = flightState
+    init?(flightState: FlightState) {
+        guard let latitude = flightState.latitude, let longitude = flightState.longitude else { return nil }
+        self.latitude = latitude
+        self.longitude = longitude
         self.title = flightState.icao24
         self.subtitle = flightState.origin_country
     }
