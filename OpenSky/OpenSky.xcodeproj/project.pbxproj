@@ -28,6 +28,8 @@
 		D156FF032D047AB000860999 /* StatesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FF022D047AB000860999 /* StatesRequest.swift */; };
 		D156FF082D04D35800860999 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FF072D04D35800860999 /* KeychainManager.swift */; };
 		D156FF0A2D04D40F00860999 /* SetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D156FF092D04D40F00860999 /* SetupManager.swift */; };
+		D18AF6762D064D1C002BCDB2 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18AF6752D064D1C002BCDB2 /* MockNetworkManager.swift */; };
+		D18AF6782D06520C002BCDB2 /* MockKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18AF6772D06520C002BCDB2 /* MockKeychainManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		D156FF022D047AB000860999 /* StatesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesRequest.swift; sourceTree = "<group>"; };
 		D156FF072D04D35800860999 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		D156FF092D04D40F00860999 /* SetupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupManager.swift; sourceTree = "<group>"; };
+		D18AF6752D064D1C002BCDB2 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
+		D18AF6772D06520C002BCDB2 /* MockKeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,8 @@
 		D156FEC42D021C3C00860999 /* OpenSkyTests */ = {
 			isa = PBXGroup;
 			children = (
+				D18AF6732D064CE9002BCDB2 /* Managers */,
+				D18AF6742D064CF5002BCDB2 /* Modules */,
 				D156FEC52D021C3C00860999 /* OpenSkyTests.swift */,
 			);
 			path = OpenSkyTests;
@@ -233,6 +239,22 @@
 				D156FEEE2D023E1B00860999 /* StatesResponse.swift */,
 			);
 			path = States;
+			sourceTree = "<group>";
+		};
+		D18AF6732D064CE9002BCDB2 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D18AF6752D064D1C002BCDB2 /* MockNetworkManager.swift */,
+				D18AF6772D06520C002BCDB2 /* MockKeychainManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		D18AF6742D064CF5002BCDB2 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,6 +410,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D18AF6762D064D1C002BCDB2 /* MockNetworkManager.swift in Sources */,
+				D18AF6782D06520C002BCDB2 /* MockKeychainManager.swift in Sources */,
 				D156FEC62D021C3C00860999 /* OpenSkyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
