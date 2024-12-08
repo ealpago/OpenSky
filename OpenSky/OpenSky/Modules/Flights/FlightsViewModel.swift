@@ -12,9 +12,7 @@ protocol FlightsViewModelInterface {
     var numberOfRowsInComponent: Int { get }
     var numberOfComponents: Int { get }
     var annotations: [FlightAnnotation] { get }
-    var request: StatesRequest { get }
     func viewDidLoad()
-    func getCurrentState() -> (lomin: Double, lamin: Double, lomax: Double, lamax: Double)?
     func showFlightsButtonTapped()
     func filterCountriesButtonTapped()
     func pickerCancelButtonTapped()
@@ -22,7 +20,6 @@ protocol FlightsViewModelInterface {
     func regionDidChangeAnimated()
     func pickerViewWillAppear()
     func pickerViewDidDisappear()
-    func filterDataWithSelectedCountry(selectedRow: Int)
     func titleForRow(row: Int) -> String?
 }
 
@@ -31,7 +28,6 @@ extension FlightsViewModel {
         static let errorTitle: String = "Error"
         static let errorOkButtonTitle: String = "OK"
         static let pickerViewShowAllTitle: String = "Show All"
-        static let showAllDataIndex: Int = 0
         static let numberOfComponents: Int = 1
         static let timeIntervalSince: Double = 5.0
     }
@@ -46,7 +42,10 @@ final class FlightsViewModel {
     private var lastChangeTimestamp: Date?
     private var regionCheckTimer: Timer?
     private var selectedCountry: String? = nil
-
+    private var request: StatesRequest {
+        let boundingBox = getCurrentState()
+        return StatesRequest(lomin: boundingBox?.lomin, lamin: boundingBox?.lamin, lomax: boundingBox?.lomax, lamax: boundingBox?.lamax)
+    }
 
     init(view: FlightsViewInterface?, networkManager: NetworkManager = NetworkManager.shared) {
         self.view = view
@@ -63,7 +62,7 @@ final class FlightsViewModel {
                     responseModel: StatesResponse.self
                 )
                 self.states = response.states
-                self.mappedCountries = [Constant.pickerViewShowAllTitle] + Array(Set(response.states.map { $0.origin_country ?? "" })).sorted()
+                self.mappedCountries = Array(Set(response.states.map { $0.origin_country ?? "" })).sorted()
                 completion()
             } catch let error as NetworkError {
                 view?.showError(title: Constant.errorTitle, message: error.localizedDescription, buttonTitle: Constant.errorOkButtonTitle, completion: {})
@@ -71,6 +70,25 @@ final class FlightsViewModel {
                 view?.showError(title: Constant.errorTitle, message: error.localizedDescription, buttonTitle: Constant.errorOkButtonTitle, completion: {})
             }
         }
+    }
+
+    private func getCurrentState() -> (lomin: Double, lamin: Double, lomax: Double, lamax: Double)? {
+        let region = view?.region
+        guard let centerLatitude = region?.center.latitude,
+              let centerLongitude = region?.center.longitude,
+              let latitudeDelta = region?.span.latitudeDelta,
+              let longitudeDelta = region?.span.longitudeDelta else {return nil}
+        let lamin = centerLatitude - (latitudeDelta / 2)
+        let lamax = centerLatitude + (latitudeDelta / 2)
+        let lomin = centerLongitude - (longitudeDelta / 2)
+        let lomax = centerLongitude + (longitudeDelta / 2)
+        return (lomin, lamin, lomax, lamax)
+    }
+
+    private func filterDataWithSelectedCountry(selectedRow: Int) {
+            let selectedCountry = mappedCountries[selectedRow]
+            self.selectedCountry = selectedCountry
+            view?.addAnnotationsToMap()
     }
 
     private func startTimer() {
@@ -126,11 +144,6 @@ extension FlightsViewModel: FlightsViewModelInterface {
         lastChangeTimestamp = Date()
     }
 
-    var request: StatesRequest {
-        let boundingBox = getCurrentState()
-        return StatesRequest(lomin: boundingBox?.lomin, lamin: boundingBox?.lamin, lomax: boundingBox?.lomax, lamax: boundingBox?.lamax)
-    }
-
     var numberOfRowsInComponent: Int {
         mappedCountries.count
     }
@@ -146,19 +159,6 @@ extension FlightsViewModel: FlightsViewModelInterface {
             self?.view?.addAnnotationsToMap()
             self?.startTimer()
         }
-    }
-
-    func getCurrentState() -> (lomin: Double, lamin: Double, lomax: Double, lamax: Double)? {
-        let region = view?.region
-        guard let centerLatitude = region?.center.latitude,
-              let centerLongitude = region?.center.longitude,
-              let latitudeDelta = region?.span.latitudeDelta,
-              let longitudeDelta = region?.span.longitudeDelta else {return nil}
-        let lamin = centerLatitude - (latitudeDelta / 2)
-        let lamax = centerLatitude + (latitudeDelta / 2)
-        let lomin = centerLongitude - (longitudeDelta / 2)
-        let lomax = centerLongitude + (longitudeDelta / 2)
-        return (lomin, lamin, lomax, lamax)
     }
 
     func showFlightsButtonTapped() {
@@ -183,16 +183,6 @@ extension FlightsViewModel: FlightsViewModelInterface {
         view?.removeFromSuperview()
         filterDataWithSelectedCountry(selectedRow: selectedRow)
         startTimer()
-    }
-
-    func filterDataWithSelectedCountry(selectedRow: Int) {
-        if selectedRow == Constant.showAllDataIndex {
-            selectedCountry = nil
-        } else {
-            let selectedCountry = mappedCountries[selectedRow]
-            self.selectedCountry = selectedCountry
-            view?.addAnnotationsToMap()
-        }
     }
 
     func titleForRow(row: Int) -> String? {
