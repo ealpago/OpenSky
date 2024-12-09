@@ -7,6 +7,7 @@
 
 import UIKit.UIView
 
+//II am using AnyObject here because I know that I will only Comform this protocol to UIViewController which is like a FlightViewController
 protocol ProgressIndicatorPresentable: AnyObject {
     func showLoadingIndicator()
     func hideLoadingIndicator()

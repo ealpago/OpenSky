@@ -21,6 +21,7 @@ struct StatesRequest: BaseRequest {
         return .get
     }
 
+    //Using Keychain to secure username and password
     var headers: [String: String]? {
         guard let username = KeychainManager.retrieve(key: "username"), let password = KeychainManager.retrieve(key: "password") else { return nil }
         let credentials = "\(username):\(password)"

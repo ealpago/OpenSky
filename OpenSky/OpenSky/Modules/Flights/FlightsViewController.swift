@@ -11,10 +11,10 @@ import MapKit
 
 #warning("I am using Xcode version 15.2. If you use guard let self in this version, you do not need to write extra self. If you are using an older Xcode version, you may get an error.")
 
-
+//MARK: Interface
 protocol FlightsViewInterface: ProgressIndicatorPresentable, AlertPresentable {
     var region: MKCoordinateRegion { get }
-    
+
     func setupUI()
     func setupPickerView()
     func addAnnotationsToMap()
@@ -22,21 +22,27 @@ protocol FlightsViewInterface: ProgressIndicatorPresentable, AlertPresentable {
     func removeFromSuperview()
 }
 
+//MARK: ViewController
 final class FlightsViewController: UIViewController {
 
+    //MARK: Outlets
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var showFlightsButton: UIButton!
     @IBOutlet private weak var filterCountriesButton: UIButton!
 
+    //MARK: Properties
     private lazy var viewModel = FlightsViewModel(view: self)
     private let pickerView = UIPickerView()
     private let pickerToolbar = UIToolbar()
 
+    //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        //This type of code blocks are better for unit testing and View Controllers become quite dummy, all logic operations should be left to viewModel
         viewModel.viewDidLoad()
     }
 
+    //MARK: Functions
     @objc func pickerCancelButtonTapped() {
         viewModel.pickerCancelButtonTapped()
     }
@@ -45,6 +51,7 @@ final class FlightsViewController: UIViewController {
         viewModel.pickerDoneButtonTapped(with: pickerView.selectedRow(inComponent: 0))
     }
 
+    //MARK: Actions
     @IBAction private func showFlightsButtonTapped() {
         viewModel.showFlightsButtonTapped()
     }
@@ -54,18 +61,23 @@ final class FlightsViewController: UIViewController {
     }
 }
 
+//MARK: MKMapViewDelegate
 extension FlightsViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // Check if the annotation is of the type FlightAnnotation
         guard let flightAnnotation = annotation as? FlightAnnotation else { return nil }
         let identifier = "FlightAnnotation"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        // If no reusable annotation view was found (i.e., it's the first time using this annotation type)
         if annotationView == nil {
             annotationView = MKMarkerAnnotationView(annotation: flightAnnotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
             annotationView?.rightCalloutAccessoryView = UIButton(type: .system)
         } else {
+            // If the annotation view is reused, update the annotation to ensure it's the correct one
             annotationView?.annotation = flightAnnotation
         }
+        //If the annotation view is an instance of MKMarkerAnnotationView (which it should be)
         if let markerAnnotationView = annotationView as? MKMarkerAnnotationView {
             markerAnnotationView.glyphImage = UIImage(systemName: "airplane")
         }
@@ -77,6 +89,7 @@ extension FlightsViewController: MKMapViewDelegate {
     }
 }
 
+//MARK: UIPickerViewDelegate, UIPickerViewDataSource
 extension FlightsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         viewModel.numberOfComponents
@@ -99,6 +112,7 @@ extension FlightsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 
+//MARK: Interface Extension
 extension FlightsViewController: FlightsViewInterface {
     var region: MKCoordinateRegion {
         mapView.region

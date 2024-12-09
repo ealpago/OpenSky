@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 
+//MARK: Interface
 protocol FlightsViewModelInterface {
     var numberOfRowsInComponent: Int { get }
     var numberOfComponents: Int { get }
@@ -23,6 +24,7 @@ protocol FlightsViewModelInterface {
     func titleForRow(row: Int) -> String?
 }
 
+//MARK: Constants
 extension FlightsViewModel {
     enum Constant {
         static let errorTitle: String = "Error"
@@ -33,7 +35,10 @@ extension FlightsViewModel {
     }
 }
 
+//MARK: ViewModel
 final class FlightsViewModel {
+
+    //MARK: Properties
     private weak var view: FlightsViewInterface?
     private let networkManager: NetworkManager
     private var states: [FlightState] = []
@@ -47,11 +52,13 @@ final class FlightsViewModel {
         return StatesRequest(lomin: boundingBox?.lomin, lamin: boundingBox?.lamin, lomax: boundingBox?.lomax, lamax: boundingBox?.lamax)
     }
 
+    //MARK: init
     init(view: FlightsViewInterface?, networkManager: NetworkManager = NetworkManager.shared) {
         self.view = view
         self.networkManager = networkManager
     }
 
+    //MARK: Functions
     private func fetchStates(request: StatesRequest, completion: @escaping()->()) {
         view?.showLoadingIndicator()
         Task {
@@ -73,6 +80,7 @@ final class FlightsViewModel {
     }
 
     private func getCurrentState() -> (lomin: Double, lamin: Double, lomax: Double, lamax: Double)? {
+        //This code block provides the Location for the request using where you are standing on the map
         let region = view?.region
         guard let centerLatitude = region?.center.latitude,
               let centerLongitude = region?.center.longitude,
@@ -127,6 +135,7 @@ final class FlightsViewModel {
     }
 }
 
+//MARK: Interface Extension
 extension FlightsViewModel: FlightsViewModelInterface {
     var annotations: [FlightAnnotation] {
         let filteredStates: [FlightState]

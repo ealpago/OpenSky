@@ -14,9 +14,3 @@ protocol BaseRequest: Codable {
     var queryParameters: [String : Any?]? { get }
     var body: Data? { get }
 }
-
-extension BaseRequest {
-    func toData() throws -> Data? {
-        return try JSONEncoder().encode(self)
-    }
-}
